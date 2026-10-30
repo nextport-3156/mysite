@@ -12,7 +12,7 @@ export function Process() {
   const { process } = siteConfig;
 
   return (
-    <section id="process" className="scroll-mt-16 border-t py-24">
+    <section id="process" className="scroll-mt-16 border-t py-28 md:py-36">
       <Container>
         <SectionHeader title={process.title} description={process.description} />
 
@@ -38,6 +38,16 @@ export function Process() {
             </li>
           ))}
         </ol>
+
+        {/* 단계 아래 덧붙이는 약속 (site.config.ts 의 process.notes) */}
+        <ul className="mt-14 flex flex-col gap-3 border-t pt-8 sm:flex-row sm:gap-10">
+          {process.notes.map((note) => (
+            <li key={note} className="flex items-baseline gap-3 text-base text-muted-foreground">
+              <span className="h-px w-5 shrink-0 translate-y-[-0.3em] bg-oak" aria-hidden />
+              {note}
+            </li>
+          ))}
+        </ul>
       </Container>
     </section>
   );

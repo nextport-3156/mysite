@@ -79,7 +79,7 @@ export function About() {
   const { about } = siteConfig;
 
   return (
-    <section id="about" className="scroll-mt-16 bg-muted py-24">
+    <section id="about" className="scroll-mt-16 bg-muted py-28 md:py-36">
       <Container className="grid gap-14 md:grid-cols-[0.95fr_1.05fr] md:items-center">
         <div>
           <SectionHeader title={about.title} />
@@ -110,6 +110,27 @@ export function About() {
             </figcaption>
           </figure>
         </div>
+      </Container>
+
+      {/* 엔드그레인 도마의 좋은 점 4가지 + 셰프의 한마디 (site.config.ts 의 about.benefits, about.quote) */}
+      <Container className="mt-20">
+        <ol className="grid gap-x-10 gap-y-8 border-t pt-12 sm:grid-cols-2 lg:grid-cols-4">
+          {about.benefits.map((b, i) => (
+            <li key={b.title}>
+              <span className="font-brand text-sm tracking-[0.2em] text-oak" aria-hidden>
+                0{i + 1}
+              </span>
+              <h3 className="mt-2 text-xl">{b.title}</h3>
+              <p className="mt-2 text-base leading-relaxed text-muted-foreground">{b.text}</p>
+            </li>
+          ))}
+        </ol>
+        <figure className="mt-16 text-center">
+          <blockquote className="font-display text-[1.45rem] leading-relaxed sm:text-[1.7rem]">
+            “{about.quote}”
+          </blockquote>
+          <figcaption className="mt-3 text-sm text-muted-foreground">— {about.quoteBy}</figcaption>
+        </figure>
       </Container>
     </section>
   );

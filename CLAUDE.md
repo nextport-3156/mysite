@@ -5,7 +5,8 @@
 ## 이 사이트에 대해 (우드앤모어 WOOD & MORE)
 - 원목 엔드그레인 도마·생활소품 브랜드의 소개 홈페이지. 주문은 네이버 스마트스토어(https://smartstore.naver.com/nextport)에서 받는다.
 - 판매 상품(2026-10 기준): 원목 엔드그레인 도마 / 미니 수납장 / 행운 액막이 명태 → `site.config.ts` 의 `sampleItems`, `supabase/schema.sql` 예시 카드
-- 섹션 순서: 첫 화면(Hero) → 이야기(About, 결 비교 그림) → 제품(Features, id는 그대로 `features`) → 만드는 과정(Process) → 문의(Contact)
+- 섹션 순서: 첫 화면(Hero) → 이야기(About, 결 비교 그림·장점 4가지) → 만드는 사람들(Makers) → 제품(Features, id는 그대로 `features`, 나무·크기·옵션 포함) → 만드는 과정(Process) → 관리·자주 묻는 질문(Care) → 문의(Contact, 교환·반품 안내)
+- 소개 글은 스마트스토어 원목 도마 상세페이지(products/13673652212) 내용을 옮긴 것. 작가 송승원(호 유목) 님은 이름 공개 허락받음, 다른 목수는 역할만 씀
 - 첫 화면 오른쪽 도마 그림은 사진이 아니라 코드로 그린 그림: `components/ui/end-grain-board.tsx` (색은 `globals.css` 의 `--wood-...`)
 - 브랜드 색·폰트 기준: `design/references/README.md`
 - 사이트에는 대표자 개인정보(전화번호, 주소, 사업자 서류 등)를 넣지 않는다. 문의는 스마트스토어로 안내한다.

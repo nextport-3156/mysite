@@ -41,7 +41,7 @@ export async function Features() {
   const items = await getItems("features");
 
   return (
-    <section id="features" className="scroll-mt-16 py-24">
+    <section id="features" className="scroll-mt-16 bg-muted py-28 md:py-36">
       <Container>
         <SectionHeader title={features.title} description={features.description} />
 
@@ -103,6 +103,51 @@ export async function Features() {
             })}
           </div>
         )}
+
+        {/* 도마 나무 · 크기 · 추가 옵션 (site.config.ts 의 features.woods / sizes / options) */}
+        <div className="mt-24 grid gap-14 border-t pt-14 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <h3 className="text-2xl">{features.woodsTitle}</h3>
+            <ul className="mt-6 divide-y border-y">
+              {features.woods.map((wood) => (
+                <li key={wood.name} className="flex flex-col gap-1 py-4 sm:flex-row sm:items-baseline sm:gap-6">
+                  <span className="w-24 shrink-0 font-display text-lg">{wood.name}</span>
+                  <span className="text-base text-muted-foreground">{wood.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-2xl">{features.sizesTitle}</h3>
+            <dl className="mt-6 divide-y border-y">
+              {features.sizes.map((size) => (
+                <div key={size.wood} className="flex flex-col gap-1 py-4 sm:flex-row sm:gap-6">
+                  <dt className="shrink-0 text-base sm:w-48">{size.wood}</dt>
+                  <dd className="flex flex-wrap gap-x-5 gap-y-1 font-brand text-base tracking-wide text-muted-foreground">
+                    {size.list.map((s) => (
+                      <span key={s}>{s}</span>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-3 text-sm text-muted-foreground">{features.sizesNote}</p>
+          </div>
+        </div>
+
+        <div className="mt-16">
+          <h3 className="text-2xl">{features.optionsTitle}</h3>
+          <ul className="mt-6 grid gap-5 md:grid-cols-3">
+            {features.options.map((option) => (
+              <li key={option.name} className="rounded-md border bg-card p-6">
+                <p className="font-display text-lg">{option.name}</p>
+                <p className="mt-2 text-base leading-relaxed text-muted-foreground">{option.text}</p>
+                <p className="mt-4 text-sm text-oak">{option.price}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Container>
     </section>
   );

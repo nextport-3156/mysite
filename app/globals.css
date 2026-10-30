@@ -1,10 +1,10 @@
 /* 웹폰트
    - Pretendard : 본문 글자
-   - Gowun Dodum(고운돋움) : 큰 제목 글자 (손으로 다듬은 듯한 부드러운 느낌)
+   - Gowun Batang(고운바탕) : 큰 제목 글자 (붓으로 쓴 듯한 단정한 명조체 — 재팬디 분위기)
    - Jost : 영문 브랜드 이름 WOOD & MORE (스마트스토어 로고와 비슷한 모양)
    다른 폰트로 바꾸려면 아래 import 줄과 :root 의 --font-... 값을 바꾸세요 */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jost:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Jost:wght@400;500&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -14,44 +14,48 @@
    ★ 디자인 토큰 (사이트 전체의 색·모서리·폰트) — 우드앤모어 버전
    --------------------------------------------------------------------------
    이 블록의 값만 바꾸면 사이트 전체 분위기가 바뀝니다.
-   색은 스마트스토어 상단 갈색 띠(호두나무 색)를 기준으로 맞췄습니다.
+   재팬디(일본식 + 북유럽식 미니멀) 분위기: 크림색 벽, 밝은 오크 가구, 먹색 그림을 기준으로 맞췄습니다.
+   (참고 이미지: design/references/재팬디-분위기.png)
 
-   - background / foreground : 기본 배경색(흰색) / 기본 글자색(짙은 고동색)
-   - primary                 : 포인트 색 = 호두나무 갈색 (주요 버튼, 강조)
-   - muted                   : 은은한 배경 = 단풍나무(메이플) 색
+   - background / foreground : 기본 배경색(크림·한지색) / 기본 글자색(먹색)
+   - primary                 : 포인트 색 = 먹갈색 (주요 버튼, 강조)
+   - muted                   : 은은한 배경 = 모래 베이지 (리넨 쿠션 색)
    - muted-foreground        : 흐린 글자 (설명문)
+   - oak                     : 보조 포인트 = 밝은 오크 (가는 선, 번호, 세로 루버 무늬)
    - border                  : 테두리 선
-   - radius                  : 모서리 둥글기 (0 = 각진, 1rem = 많이 둥근)
+   - radius                  : 모서리 둥글기 (0 = 각진, 1rem = 많이 둥근) — 나무 가구처럼 거의 각지게
    - wood-...                : 도마 그림(나무 조각)의 색. 어두운 조각 3개 + 밝은 조각 3개
    ========================================================================== */
 :root {
-  --radius: 0.375rem;
+  --radius: 0.125rem;
 
-  --background: #ffffff;
-  --foreground: #2b2420;
+  --background: #f4efe6;
+  --foreground: #2a2521;
 
-  --card: #ffffff;
-  --card-foreground: #2b2420;
-  --popover: #ffffff;
-  --popover-foreground: #2b2420;
+  --card: #faf7f1;
+  --card-foreground: #2a2521;
+  --popover: #faf7f1;
+  --popover-foreground: #2a2521;
 
-  --primary: #634e41;
-  --primary-foreground: #ffffff;
+  --primary: #3d342c;
+  --primary-foreground: #f4efe6;
 
-  --secondary: #f3eee9;
-  --secondary-foreground: #2b2420;
+  --secondary: #e9e0d2;
+  --secondary-foreground: #2a2521;
 
-  --muted: #f3eee9;
-  --muted-foreground: #6f6158;
+  --muted: #e9e0d2;
+  --muted-foreground: #6b6158;
 
-  --accent: #ebe3db;
-  --accent-foreground: #2b2420;
+  --accent: #e2d6c4;
+  --accent-foreground: #2a2521;
+
+  --oak: #b8936a;
 
   --destructive: #b42318;
 
-  --border: #e4dbd2;
-  --input: #d9cdc2;
-  --ring: #8a7262;
+  --border: #ddd2c2;
+  --input: #d3c6b3;
+  --ring: #9c8468;
 
   /* 도마 그림 색 (마호가니·호두 계열 어두운 조각 / 티크·오크 계열 밝은 조각) */
   --wood-dark-1: #6b3a26;
@@ -64,7 +68,7 @@
 
   /* 폰트 */
   --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-display: "Gowun Dodum", var(--font-body); /* 큰 제목용 */
+  --font-display: "Gowun Batang", var(--font-body); /* 큰 제목용 */
   --font-brand: "Jost", var(--font-body); /* 영문 브랜드 이름용 */
 }
 
@@ -88,6 +92,7 @@
   --border: #3a302a;
   --input: #3a302a;
   --ring: #8a7262;
+  --oak: #c9a57c;
 }
 
 /* 위 토큰을 Tailwind 클래스(bg-primary, text-muted-foreground 등)로 연결 — 수정할 필요 없음 */
@@ -110,6 +115,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-oak: var(--oak);
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
@@ -137,6 +143,16 @@
     font-family: var(--font-display);
     font-weight: 400;
   }
+}
+
+/* 세로 원목 루버(가는 세로줄) 무늬 — 재팬디 참고 이미지의 나무 창살 느낌.
+   class="louver" 를 붙이면 그 칸에 은은한 세로줄이 깔립니다. 줄 색은 --oak 를 따릅니다. */
+.louver {
+  background-image: repeating-linear-gradient(
+    to right,
+    color-mix(in srgb, var(--oak) 55%, transparent) 0 2px,
+    transparent 2px 14px
+  );
 }
 
 /* 첫 화면 도마 그림: 페이지가 열릴 때 나무 조각이 대각선 방향으로 하나씩 놓이는 효과 (한 번만) */

@@ -25,8 +25,9 @@ export function Navbar() {
         </Link>
 
         {/* 데스크톱 메뉴 */}
-        <div className="hidden items-center gap-8 md:flex">
-          <nav className="flex items-center gap-8">
+        {/* 메뉴가 6개라 노트북 너비(lg, 1024px) 이상에서만 펼쳐 보이고, 그보다 좁으면 햄버거 버튼으로 엽니다 */}
+        <div className="hidden items-center gap-8 lg:flex">
+          <nav className="flex items-center gap-7">
             {siteConfig.nav.map((item) => (
               <a
                 key={item.href}
@@ -37,17 +38,22 @@ export function Navbar() {
               </a>
             ))}
           </nav>
-          <Button asChild size="sm">
-            <a href={siteConfig.store.href} target="_blank" rel="noreferrer">
-              {siteConfig.store.label}
-            </a>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button asChild size="sm">
+              <a href={siteConfig.store.href} target="_blank" rel="noreferrer">
+                {siteConfig.store.label}
+              </a>
+            </Button>
+            <Button asChild size="sm" variant="outline">
+              <Link href={siteConfig.admin.href}>{siteConfig.admin.label}</Link>
+            </Button>
+          </div>
         </div>
 
         {/* 모바일 메뉴 버튼 */}
         <button
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-md md:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-md lg:hidden"
           aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -57,7 +63,7 @@ export function Navbar() {
       </Container>
 
       {/* 모바일 메뉴 펼침 */}
-      <nav className={cn("border-t border-border/70 md:hidden", open ? "block" : "hidden")}>
+      <nav className={cn("border-t border-border/70 lg:hidden", open ? "block" : "hidden")}>
         <Container className="flex flex-col py-2">
           {siteConfig.nav.map((item) => (
             <a
@@ -77,6 +83,13 @@ export function Navbar() {
           >
             {siteConfig.store.label}
           </a>
+          <Link
+            href={siteConfig.admin.href}
+            onClick={() => setOpen(false)}
+            className="py-3 text-base text-muted-foreground hover:text-foreground"
+          >
+            {siteConfig.admin.label}
+          </Link>
         </Container>
       </nav>
     </header>
