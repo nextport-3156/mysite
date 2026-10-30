@@ -37,11 +37,11 @@ values ('images', 'images', true)
 on conflict (id) do nothing;
 
 -- 4) 예시 카드 3개 — 우드앤모어 스마트스토어 상품 (표가 비어 있을 때만 넣음)
---    사진은 관리자 페이지(/admin)에서 카드마다 올리면 됩니다.
-insert into public.items (section, title, description, link_url, sort_order)
+--    사진은 사이트 폴더(public/images/products)에 있는 사진을 씁니다. 관리자 페이지(/admin)에서 바꿀 수 있습니다.
+insert into public.items (section, title, description, image_url, link_url, sort_order)
 select * from (values
-  ('features', '원목 엔드그레인 도마', '나무 조각을 세워 이어 붙인 바둑판 무늬 도마. 칼자국이 덜 남습니다. (리뷰 41개)', 'https://smartstore.naver.com/nextport/products/13673652212', 1),
-  ('features', '미니 수납장', '서랍 하나에 선반이 붙은 작은 원목 수납장. 58,800원', 'https://smartstore.naver.com/nextport', 2),
-  ('features', '행운 액막이 명태', '마음을 담아 건네는 작은 행운. 개업·이사·집들이 선물. 19,000원', 'https://smartstore.naver.com/nextport/products/13768516297', 3)
-) as v(section, title, description, link_url, sort_order)
+  ('features', '원목 엔드그레인 도마', '나무 조각을 세워 이어 붙인 바둑판 무늬 도마. 칼자국이 덜 남습니다. (리뷰 41개)', '/images/products/endgrain-board.jpg', 'https://smartstore.naver.com/nextport/products/13673652212', 1),
+  ('features', '미니 수납장', '서랍 하나에 선반이 붙은 작은 원목 수납장. 58,800원', '/images/products/mini-cabinet.jpg', 'https://smartstore.naver.com/nextport', 2),
+  ('features', '행운 액막이 명태', '마음을 담아 건네는 작은 행운. 개업·이사·집들이 선물. 19,000원', '/images/products/lucky-pollack.jpg', 'https://smartstore.naver.com/nextport/products/13768516297', 3)
+) as v(section, title, description, image_url, link_url, sort_order)
 where not exists (select 1 from public.items);

@@ -64,15 +64,18 @@ export const siteConfig = {
       "카드를 누르면 스마트스토어 상품 화면으로 이동합니다. 가격은 스마트스토어 기준이며 바뀔 수 있습니다.",
   },
 
-  /* 만드는 과정 섹션 (순서대로 보여 줌) */
+  /* 만드는 과정 섹션 (순서대로 보여 줌)
+     image = public/images/process 폴더의 사진. 사진을 바꾸려면 같은 이름으로 덮어쓰거나 경로를 바꾸세요 */
   process: {
     title: "도마가 만들어지는 과정",
-    description: "엔드그레인 도마 하나에 나무 조각 수십 개가 들어갑니다.",
+    description: "엔드그레인 도마 하나는 여섯 단계를 거쳐 만들어집니다.",
     steps: [
-      { title: "나무 고르기", text: "도마로 쓸 원목을 고르고 크기에 맞게 자릅니다." },
-      { title: "세워 자르기", text: "나이테 면이 위로 오도록 같은 두께의 조각으로 자릅니다." },
-      { title: "이어 붙이기", text: "색이 다른 조각을 엇갈려 붙여 바둑판 무늬를 만듭니다." },
-      { title: "다듬고 마감하기", text: "표면을 고르게 갈아 내고 오일로 마감합니다." },
+      { title: "원목 선별", text: "색과 결이 다른 원목을 골라 도마 재료로 준비합니다.", image: "/images/process/step-1.jpg" },
+      { title: "1차 재단·접착", text: "원목을 긴 막대로 잘라 색이 번갈아 오도록 붙입니다.", image: "/images/process/step-2.jpg" },
+      { title: "블록 절단", text: "붙인 판을 가로로 잘라 나이테 면이 보이는 줄을 만듭니다.", image: "/images/process/step-3.jpg" },
+      { title: "패턴 배열", text: "잘라 낸 줄을 한 칸씩 엇갈려 놓아 바둑판 무늬를 맞춥니다.", image: "/images/process/step-4.jpg" },
+      { title: "2차 접착·압착", text: "무늬를 맞춘 줄을 다시 붙이고 클램프로 단단히 눌러 둡니다.", image: "/images/process/step-5.jpg" },
+      { title: "샌딩·오일 마감", text: "표면을 고르게 갈아 내고 오일을 먹여 마감합니다.", image: "/images/process/step-6.jpg" },
     ],
   },
 
@@ -98,14 +101,14 @@ export const siteConfig = {
 
 /* Supabase를 아직 연결하지 않았을 때 대신 보여줄 예시 카드 (스마트스토어 판매 상품).
    Supabase를 연결하면 이 내용 대신 관리자 페이지에서 등록한 카드가 보입니다.
-   사진(image_url)은 3차시에 관리자 페이지에서 올리면 됩니다. 사진이 없으면 나무 무늬가 대신 보입니다. */
+   사진(image_url)은 public/images/products 폴더의 사진입니다. 관리자 페이지에서 새 사진을 올리면 그 사진으로 바뀝니다. */
 export const sampleItems: Item[] = [
   {
     id: "sample-1",
     section: "features",
     title: "원목 엔드그레인 도마",
     description: "나무 조각을 세워 이어 붙인 바둑판 무늬 도마. 칼자국이 덜 남습니다. (리뷰 41개)",
-    image_url: null,
+    image_url: "/images/products/endgrain-board.jpg",
     link_url: `${STORE_URL}/products/13673652212`,
     sort_order: 1,
     is_visible: true,
@@ -116,7 +119,7 @@ export const sampleItems: Item[] = [
     section: "features",
     title: "미니 수납장",
     description: "서랍 하나에 선반이 붙은 작은 원목 수납장. 58,800원",
-    image_url: null,
+    image_url: "/images/products/mini-cabinet.jpg",
     link_url: STORE_URL,
     sort_order: 2,
     is_visible: true,
@@ -127,7 +130,7 @@ export const sampleItems: Item[] = [
     section: "features",
     title: "행운 액막이 명태",
     description: "마음을 담아 건네는 작은 행운. 개업·이사·집들이 선물. 19,000원",
-    image_url: null,
+    image_url: "/images/products/lucky-pollack.jpg",
     link_url: `${STORE_URL}/products/13768516297`,
     sort_order: 3,
     is_visible: true,

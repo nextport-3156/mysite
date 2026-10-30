@@ -54,7 +54,7 @@ export async function Features() {
             {items.map((item, index) => {
               const card = (
                 <article className="group h-full">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-muted">
+                  <div className="relative aspect-square overflow-hidden rounded-md bg-muted">
                     {item.image_url ? (
                       <Image
                         src={item.image_url}
