@@ -36,11 +36,12 @@ insert into storage.buckets (id, name, public)
 values ('images', 'images', true)
 on conflict (id) do nothing;
 
--- 4) 예시 카드 3개 (표가 비어 있을 때만 넣음)
-insert into public.items (section, title, description, sort_order)
+-- 4) 예시 카드 3개 — 우드앤모어 스마트스토어 상품 (표가 비어 있을 때만 넣음)
+--    사진은 관리자 페이지(/admin)에서 카드마다 올리면 됩니다.
+insert into public.items (section, title, description, link_url, sort_order)
 select * from (values
-  ('features', '첫 번째 기능', '관리자 페이지에서 이 카드를 수정해 보세요.', 1),
-  ('features', '두 번째 기능', '이미지와 링크를 넣을 수도 있어요.', 2),
-  ('features', '세 번째 기능', '필요 없으면 삭제하면 됩니다.', 3)
-) as v(section, title, description, sort_order)
+  ('features', '원목 엔드그레인 도마', '나무 조각을 세워 이어 붙인 바둑판 무늬 도마. 칼자국이 덜 남습니다. (리뷰 41개)', 'https://smartstore.naver.com/nextport/products/13673652212', 1),
+  ('features', '미니 수납장', '서랍 하나에 선반이 붙은 작은 원목 수납장. 58,800원', 'https://smartstore.naver.com/nextport', 2),
+  ('features', '행운 액막이 명태', '마음을 담아 건네는 작은 행운. 개업·이사·집들이 선물. 19,000원', 'https://smartstore.naver.com/nextport/products/13768516297', 3)
+) as v(section, title, description, link_url, sort_order)
 where not exists (select 1 from public.items);

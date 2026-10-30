@@ -1,79 +1,93 @@
-/* 한글 웹폰트 (Pretendard) — 다른 폰트로 바꾸려면 이 줄과 아래 --font-sans 를 바꾸세요 */
+/* 웹폰트
+   - Pretendard : 본문 글자
+   - Gowun Dodum(고운돋움) : 큰 제목 글자 (손으로 다듬은 듯한 부드러운 느낌)
+   - Jost : 영문 브랜드 이름 WOOD & MORE (스마트스토어 로고와 비슷한 모양)
+   다른 폰트로 바꾸려면 아래 import 줄과 :root 의 --font-... 값을 바꾸세요 */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jost:wght@400;500&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 /* ==========================================================================
-   ★ 디자인 토큰 (사이트 전체의 색·모서리·폰트)
+   ★ 디자인 토큰 (사이트 전체의 색·모서리·폰트) — 우드앤모어 버전
    --------------------------------------------------------------------------
    이 블록의 값만 바꾸면 사이트 전체 분위기가 바뀝니다.
-   shadcn/ui, 21st.dev 컴포넌트도 이 이름(--primary, --muted ...)을 그대로 씁니다.
+   색은 스마트스토어 상단 갈색 띠(호두나무 색)를 기준으로 맞췄습니다.
 
-   - background / foreground : 기본 배경색 / 기본 글자색
-   - primary                 : 포인트 색 (주요 버튼 등)
-   - muted                   : 은은한 배경 (카드, 구역 배경)
+   - background / foreground : 기본 배경색(흰색) / 기본 글자색(짙은 고동색)
+   - primary                 : 포인트 색 = 호두나무 갈색 (주요 버튼, 강조)
+   - muted                   : 은은한 배경 = 단풍나무(메이플) 색
    - muted-foreground        : 흐린 글자 (설명문)
    - border                  : 테두리 선
    - radius                  : 모서리 둥글기 (0 = 각진, 1rem = 많이 둥근)
-
-   색은 #9a0002 같은 HEX 값으로 바꿔도 됩니다.
+   - wood-...                : 도마 그림(나무 조각)의 색. 어두운 조각 3개 + 밝은 조각 3개
    ========================================================================== */
 :root {
-  --radius: 0.75rem;
+  --radius: 0.375rem;
 
   --background: #ffffff;
-  --foreground: #111111;
+  --foreground: #2b2420;
 
   --card: #ffffff;
-  --card-foreground: #111111;
+  --card-foreground: #2b2420;
   --popover: #ffffff;
-  --popover-foreground: #111111;
+  --popover-foreground: #2b2420;
 
-  --primary: #111111;
+  --primary: #634e41;
   --primary-foreground: #ffffff;
 
-  --secondary: #f4f4f5;
-  --secondary-foreground: #111111;
+  --secondary: #f3eee9;
+  --secondary-foreground: #2b2420;
 
-  --muted: #f4f4f5;
-  --muted-foreground: #6b6b6b;
+  --muted: #f3eee9;
+  --muted-foreground: #6f6158;
 
-  --accent: #f4f4f5;
-  --accent-foreground: #111111;
+  --accent: #ebe3db;
+  --accent-foreground: #2b2420;
 
-  --destructive: #dc2626;
+  --destructive: #b42318;
 
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: #a3a3a3;
+  --border: #e4dbd2;
+  --input: #d9cdc2;
+  --ring: #8a7262;
+
+  /* 도마 그림 색 (마호가니·호두 계열 어두운 조각 / 티크·오크 계열 밝은 조각) */
+  --wood-dark-1: #6b3a26;
+  --wood-dark-2: #7c4630;
+  --wood-dark-3: #5a3324;
+  --wood-light-1: #b47a4a;
+  --wood-light-2: #c38c58;
+  --wood-light-3: #a96d40;
+  --wood-ring: #2b1a12; /* 나이테 선 색 */
 
   /* 폰트 */
   --font-body: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-display: var(--font-body); /* 제목용 폰트를 따로 쓰고 싶으면 여기만 바꾸기 */
+  --font-display: "Gowun Dodum", var(--font-body); /* 큰 제목용 */
+  --font-brand: "Jost", var(--font-body); /* 영문 브랜드 이름용 */
 }
 
 /* 다크 모드용 값 (html 태그에 class="dark" 를 붙이면 적용) */
 .dark {
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-  --card: #141414;
-  --card-foreground: #fafafa;
-  --popover: #141414;
-  --popover-foreground: #fafafa;
-  --primary: #fafafa;
-  --primary-foreground: #0a0a0a;
-  --secondary: #1f1f1f;
-  --secondary-foreground: #fafafa;
-  --muted: #1f1f1f;
-  --muted-foreground: #a1a1a1;
-  --accent: #1f1f1f;
-  --accent-foreground: #fafafa;
+  --background: #1c1714;
+  --foreground: #f4efea;
+  --card: #241e1a;
+  --card-foreground: #f4efea;
+  --popover: #241e1a;
+  --popover-foreground: #f4efea;
+  --primary: #d9b48f;
+  --primary-foreground: #1c1714;
+  --secondary: #2e2621;
+  --secondary-foreground: #f4efea;
+  --muted: #2e2621;
+  --muted-foreground: #b8aa9e;
+  --accent: #3a302a;
+  --accent-foreground: #f4efea;
   --destructive: #ef4444;
-  --border: #2a2a2a;
-  --input: #2a2a2a;
-  --ring: #525252;
+  --border: #3a302a;
+  --input: #3a302a;
+  --ring: #8a7262;
 }
 
 /* 위 토큰을 Tailwind 클래스(bg-primary, text-muted-foreground 등)로 연결 — 수정할 필요 없음 */
@@ -96,12 +110,13 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
+  --font-brand: var(--font-brand);
 }
 
 @layer base {
@@ -113,11 +128,37 @@
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    font-size: 1.0625rem; /* 17px — 글자를 조금 크게 */
     word-break: keep-all; /* 한글 단어가 중간에 끊기지 않게 */
   }
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
+    font-weight: 400;
+  }
+}
+
+/* 첫 화면 도마 그림: 페이지가 열릴 때 나무 조각이 대각선 방향으로 하나씩 놓이는 효과 (한 번만) */
+@keyframes eg-place {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.eg-animate .eg-tile {
+  animation: eg-place 0.5s ease-out both;
+  transform-box: fill-box;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .eg-animate .eg-tile {
+    animation: none;
   }
 }
