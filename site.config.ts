@@ -114,30 +114,59 @@ export const siteConfig = {
       { value: "300개", label: "2차 오프라인 완판" },
     ],
     recordsNote:
-      "롯데백화점 본점 팝업 등에서 직접 만나 왔습니다. 광고가 아니라 써 본 분들의 입소문으로 두 번 다 완판했습니다.",
-    /* 팀 소개 (역할만) */
-    team: [
-      { role: "Founder & Maker", text: "셰프의 경험과 목수의 기술을 바탕으로 브랜드의 방향을 만들고, 제품을 직접 기획하고 제작합니다." },
-      { role: "Creative Maker", text: "새로운 아이디어를 가장 먼저 시도하고, 공방에 즐거운 에너지와 신선한 영감을 더합니다." },
-      { role: "Boss", text: "30년 이상의 목공 경력. 오랜 시간 쌓아 온 기술과 노하우로 원목의 특성을 이해하고 완성도 높은 제품을 만듭니다." },
-      { role: "Wood Artist", text: "오랜 시간 목공 예술을 이어 오며 쌓은 경험과 수상 경력을 바탕으로 원목의 가치를 작품에 담아냅니다." },
-    ],
-    /* 작가 소개 (상세페이지 캡처의 작은 글씨를 읽은 것 — 연도·이름이 틀리면 여기서 고치세요) */
-    artist: {
-      label: "작가",
-      name: "송승원",
-      penName: "유목",
-      english: "Song Seung-Won",
-      awardsTitle: "대한민국 현대 미술 대전",
-      awards: [
-        "2020 문화체육관광부 장관상",
-        "2019 목공예 특별상",
-        "2018 목공예 최우수상",
-        "2017 목공예 우수상",
+      "광고가 아니라 써 본 분들의 입소문으로 두 번 다 완판했습니다.",
+    /* 백화점 팝업 사진 (public/images/popup 폴더). wide: true 는 가로 사진이라 두 칸을 차지합니다 */
+    popup: {
+      eyebrow: "LOTTE DEPARTMENT STORE",
+      title: "롯데백화점 본점 팝업",
+      text: "직접 만나고, 나누는 나무의 온기. 매장에서 손님들께 도마를 직접 보여 드리고 소개했습니다.",
+      photos: [
+        { src: "/images/popup/popup-1.jpg", alt: "롯데백화점 팝업 매장에서 도마와 소품 앞에 선 우드앤모어 목수" },
+        { src: "/images/popup/popup-2.jpg", alt: "팝업 매장 도마 진열대 뒤에서 두 팔을 들어 인사하는 목수" },
+        { src: "/images/popup/popup-3.jpg", alt: "팝업 매장 도마 진열대 뒤에서 손으로 하트를 만드는 목수" },
+        { src: "/images/popup/popup-4.jpg", alt: "팝업 매장에서 손님들께 도마를 소개하는 모습" },
+        { src: "/images/popup/popup-5.jpg", alt: "거치대에 세워 진열한 여러 나무색의 엔드그레인 도마", wide: true },
+        { src: "/images/popup/popup-6.jpg", alt: "도마와 새집 소품, 나무 장난감이 함께 놓인 팝업 진열대", wide: true },
       ],
-      tvTitle: "TV 출연",
-      tv: ["2020 서민갑부", "2022 생생정보", "2025 동네 한 바퀴"],
     },
+    /* 팀 소개 4명
+       - image = public/images/team 폴더의 사진. 그 이름으로 사진 파일을 넣으면 자동으로 보입니다.
+         (사진을 바꿀 때는 같은 이름으로 덮어쓰지 말고 새 이름(-v3 등)으로 넣고 여기 경로도 바꾸세요.
+          같은 이름이면 개발 화면에 예전 사진이 계속 보일 수 있습니다)
+         (사진이 아직 없으면 나무 무늬가 대신 보입니다)
+       - 이름은 공개 허락받은 분만 name 에 적습니다. 지금은 Wood Artist(송승원 작가)만.
+       - Wood Artist 의 수상·방송 경력은 상세페이지 작은 글씨를 읽은 것 — 틀리면 여기서 고치세요 */
+    team: [
+      {
+        role: "Founder & Maker",
+        text: "셰프의 경험과 목수의 기술을 바탕으로 브랜드의 방향을 만들고, 제품을 직접 기획하고 제작합니다.",
+        image: "/images/team/founder-v2.jpg",
+      },
+      {
+        role: "Creative Maker",
+        text: "새로운 아이디어를 가장 먼저 시도하고, 공방에 즐거운 에너지와 신선한 영감을 더합니다.",
+        image: "/images/team/creative-v2.jpg",
+      },
+      {
+        role: "Boss",
+        text: "30년 이상의 목공 경력. 오랜 시간 쌓아 온 기술과 노하우로 원목의 특성을 이해하고 완성도 높은 제품을 만듭니다.",
+        image: "/images/team/boss-v2.jpg",
+      },
+      {
+        role: "Wood Artist",
+        name: "송승원",
+        penName: "유목",
+        text: "오랜 시간 목공 예술을 이어 오며 쌓은 경험과 수상 경력을 바탕으로 원목의 가치를 작품에 담아냅니다.",
+        image: "/images/team/artist-v2.jpg",
+        career: [
+          {
+            title: "대한민국 현대 미술 대전",
+            list: ["2020 문화체육관광부 장관상", "2019 목공예 특별상", "2018 목공예 최우수상", "2017 목공예 우수상"],
+          },
+          { title: "TV 출연", list: ["2020 서민갑부", "2022 생생정보", "2025 동네 한 바퀴"] },
+        ],
+      },
+    ],
     workshop:
       "같은 건물 1층에서 목공방을 직접 운영합니다. 실제 작업이 이루어지는 공방과 다양한 원목 제품을 직접 둘러보실 수 있습니다.",
   },

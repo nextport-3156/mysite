@@ -1,14 +1,25 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
+import Image from "next/image";
+
 import { siteConfig } from "@/site.config";
 import { Container } from "@/components/layout/container";
 import { SectionHeader } from "@/components/layout/section-header";
 
 /* 만드는 사람들 섹션 (스마트스토어 상세페이지 내용을 옮겨 온 섹션)
    - 글자는 모두 site.config.ts 의 makers 에서 바꿉니다.
-   - 순서: 왜 우드앤모어인가(번호 4개) → 이야기 카드 2개 → 완판 기록 → 팀 소개 → 작가 소개 → 공방 안내
-   - 목수 개인 이름은 넣지 않습니다(개인정보). 작가 송승원(유목) 님은 공개 허락을 받았습니다. */
+   - 순서: 왜 우드앤모어인가(번호 4개) → 이야기 카드 2개 → 백화점 팝업 사진 → 완판 기록 → 팀 소개(사진 + 프로필 4명) → 공방 안내
+   - 팝업 사진은 public/images/popup 폴더에 있습니다.
+   - 목수 개인 이름은 넣지 않습니다(개인정보). 작가 송승원(유목) 님은 공개 허락을 받았습니다.
+   - 팀 사진은 public/images/team 폴더에 넣습니다. 파일이 아직 없으면 나무 무늬가 대신 보입니다. */
+
+/** public 폴더에 사진 파일이 실제로 있는지 확인 (없으면 깨진 그림 대신 나무 무늬를 보여 주려고) */
+function photoExists(src: string) {
+  return existsSync(path.join(process.cwd(), "public", src));
+}
+
 export function Makers() {
   const { makers } = siteConfig;
-  const { artist } = makers;
 
   return (
     <section id="makers" className="scroll-mt-16 py-28 md:py-36">
@@ -43,8 +54,31 @@ export function Makers() {
           ))}
         </div>
 
+        {/* 백화점 팝업 사진 (실제 참여 사진) */}
+        <div className="mt-24">
+          <p className="font-brand text-sm tracking-[0.18em] text-oak">{makers.popup.eyebrow}</p>
+          <h3 className="mt-3 text-2xl sm:text-[1.75rem]">{makers.popup.title}</h3>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{makers.popup.text}</p>
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {makers.popup.photos.map((photo) => (
+              <li
+                key={photo.src}
+                className={`relative overflow-hidden bg-muted ${photo.wide ? "col-span-2 aspect-[4/3]" : "aspect-[3/4]"}`}
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  sizes={photo.wide ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
+                  className="object-cover"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* 완판 기록 */}
-        <div className="mt-20 flex flex-col gap-8 border-y py-10 md:flex-row md:items-center md:gap-14">
+        <div className="mt-12 flex flex-col gap-8 border-y py-10 md:flex-row md:items-center md:gap-14">
           <ul className="flex gap-12">
             {makers.records.map((record) => (
               <li key={record.label}>
@@ -56,40 +90,48 @@ export function Makers() {
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">{makers.recordsNote}</p>
         </div>
 
-        {/* 팀 소개 + 작가 소개 */}
-        <div className="mt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
-          <ul className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
-            {makers.team.map((member) => (
-              <li key={member.role} className="border-t pt-5">
-                <p className="font-brand text-sm tracking-[0.18em] text-oak">{member.role.toUpperCase()}</p>
-                <p className="mt-3 text-base leading-relaxed text-muted-foreground">{member.text}</p>
-              </li>
-            ))}
-          </ul>
+        {/* 팀 소개 4명: 사진 + 역할 + 소개 (Wood Artist 는 이름과 경력까지) */}
+        <ul className="mt-20 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
+          {makers.team.map((member) => (
+            <li key={member.role}>
+              <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+                {photoExists(member.image) ? (
+                  <Image
+                    src={member.image}
+                    alt={member.name ? `${member.role} ${member.name}` : member.role}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover object-top"
+                  />
+                ) : (
+                  <div className="louver absolute inset-0 opacity-60" aria-hidden />
+                )}
+              </div>
 
-          <aside className="bg-primary p-8 text-primary-foreground sm:p-10">
-            <p className="text-sm text-primary-foreground/70">{artist.label}</p>
-            <p className="mt-1 font-display text-3xl">
-              {artist.name}
-              <span className="ml-3 text-lg text-primary-foreground/70">호 {artist.penName}</span>
-            </p>
-            <p className="mt-1 font-brand text-sm tracking-[0.12em] text-primary-foreground/60">{artist.english}</p>
+              <p className="mt-5 font-brand text-sm tracking-[0.18em] text-oak">{member.role.toUpperCase()}</p>
+              {member.name ? (
+                <h3 className="mt-2 text-2xl">
+                  {member.name}
+                  {member.penName ? (
+                    <span className="ml-2 text-base font-normal text-muted-foreground">호 {member.penName}</span>
+                  ) : null}
+                </h3>
+              ) : null}
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">{member.text}</p>
 
-            <div className="mt-8 h-px w-10 bg-oak" aria-hidden />
-            <p className="mt-6 text-sm text-primary-foreground/70">{artist.awardsTitle}</p>
-            <ul className="mt-2 space-y-1 text-base">
-              {artist.awards.map((award) => (
-                <li key={award}>{award}</li>
+              {member.career?.map((group) => (
+                <div key={group.title} className="mt-5 border-t pt-4">
+                  <p className="text-sm text-oak">{group.title}</p>
+                  <ul className="mt-2 space-y-1 text-[0.95rem] text-foreground">
+                    {group.list.map((line) => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
-            <p className="mt-6 text-sm text-primary-foreground/70">{artist.tvTitle}</p>
-            <ul className="mt-2 space-y-1 text-base">
-              {artist.tv.map((show) => (
-                <li key={show}>{show}</li>
-              ))}
-            </ul>
-          </aside>
-        </div>
+            </li>
+          ))}
+        </ul>
 
         <p className="mt-14 max-w-2xl text-base leading-relaxed text-muted-foreground">{makers.workshop}</p>
       </Container>
